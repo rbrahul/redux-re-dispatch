@@ -61,7 +61,7 @@ export function* getAllStationsSaga(payload) {
     /*
     ** This will try to fetch all the stations again when thrown exception. Here it will try maximum 3 time to get all the stations as failover.
     ** @param type {string} - it's a action type that will be redispatched from recent history
-    ** @param {number} - Maximum number of attempt to re-dispatch that action
+    ** @param maxNumberOfDispatch {number} - Maximum number of attempt to re-dispatch that action
     */
     redispatch(types.GET_STATIONS, 3);
     yield [
