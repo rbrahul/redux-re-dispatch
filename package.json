@@ -1,0 +1,26 @@
+{
+    "name": "redux-re-dispatch",
+    "version": "1.0.0",
+    "description": "A redux middleware to dispatch recent actions",
+    "main": "./lib/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rbrahul/redux-re-dispatch.git"
+    },
+    "keywords": [
+        "redux",
+        "react",
+        "dispatch",
+        "middleware",
+        "action",
+        "store",
+        "history"
+    ],
+    "author": "Rahul Baruri <rahulbaruri1@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rbrahul/redux-re-dispatch/issues"
+    },
+    "homepage": "https://github.com/rbrahul/redux-re-dispatch",
+    "devDependencies": {}
+}
