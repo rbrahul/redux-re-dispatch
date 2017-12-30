@@ -34,6 +34,8 @@ This example describes how it can be used with redux-saga. You can use it wherev
 
 You don't need to pass any payload when you **redispatch** any **action**. Payload will be added by middleware itself. So you need to pass only *actionType* and *number of attemps as parameters*.
 ```js
+
+import { redispatch } from 'redux-re-dispatch';
 ...
 export function* getAllStationsSaga(payload) {
   try {
