@@ -1,5 +1,5 @@
 # Redux Re-dispatch
-A redux middleware to dispatch recent actions from history to make your failover experience more comfortable.
+A redux middleware to dispatch recent actions from action history que.
 
 ## Installation:
 
