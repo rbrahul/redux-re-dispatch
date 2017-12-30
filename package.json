@@ -1,7 +1,7 @@
 {
     "name": "redux-re-dispatch",
-    "version": "1.0.0",
-    "description": "A redux middleware to dispatch recent actions",
+    "version": "1.0.1",
+    "description": "A redux middleware to dispatch recent actions based on action Que",
     "main": "./lib/index.js",
     "repository": {
         "type": "git",
