@@ -3,9 +3,18 @@ A redux middleware to dispatch recent actions from action history que.
 
 ## Installation:
 
+![Redux-Re-Dispatch](https://nodei.co/npm/redux-re-dispatch.png?downloads=true)
+
+**npm**
 ```bash
 $ npm install 'redux-re-dispatch'
 ```
+
+**For yarn:**
+```bash
+$ yarn add 'redux-re-dispatch'
+```
+
 ## Configure Middleware:
 
 ```js
