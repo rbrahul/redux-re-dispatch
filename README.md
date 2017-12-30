@@ -14,7 +14,9 @@ import { setupRedispatcher } from 'redux-re-dispatch';
 
 const redispatchMiddleware = setupRedispatcher({
     logger: true,
-    maxActionHistories: 200
+    maxActionHistories: 200,
+    intervalForResetingDispatch: 2000
+    maxNumberOfReDispatch: 5,
  });
 
  const middlewares = [redispatchMiddleware];
@@ -27,12 +29,15 @@ const store = createStore(rootReducer,initialSte, compose(applyMiddleware(...mid
 | Property | Data Type | Default Value | Description |
 | --- | --- | --- | --- |
 | **logger** | *string* | *true* | You can show/hide logs in console when action is redispatched |
-| **maxActionHistories** | *integer* | *200* | You can limit the maximum size of collection or que to save actions as history|
+| **maxActionHistories** | *integer* | *200* | You can limit the maximum size of collection or que to save actions as history. |
+| **intervalForResetingDispatch** | *integer*  | *3000* **(Millisecond)**| You can limit the maximum allocated time for re-dispatching same **actionType**. After every **intervalForResetingDispatch** time slot for each action type, the new time slot will be allocated to reach the max execution limit| If action type **TYPE_X** are executed the **maxNumberOfReDispatch** times then the counter will be reset after  **intervalForResetingDispatch** milliseconds.
+| **maxNumberOfReDispatch** | *integer* | *10* | You can define the default number of execution for how many times any action will be re-dispatched using *redispatched(actionType)** when second parameter is omitted. |
+
 
 ## Usage Example: 
-This example describes how it can be used with redux-saga. You can use it wherever you want. In this example we are trying to pull all the station information dispatching  **types.GET_STATIONS** action. If any error occurs while getting response from API or by any means then we may need to try the same API call or process again until we get the actual response. But the number of API call or execution should not be infinite. That's why we need to manage how my attempt it can take to fetch the train stations.
+This example describes how it can be used with redux-saga. You can use it wherever you want. In this example we are trying to pull all the station information dispatching  **types.GET_STATIONS** action. If any error occurs while getting response from API or by any means then we may need to try the same API call or process again until we get the actual response. But the number of API call or execution should not be infinite.
 
-You don't need to pass any payload when you **redispatch** any **action**. Payload will be added by middleware itself. So you need to pass only *actionType* and *number of attemps as parameters*.
+You don't need to pass any payload when you **redispatch** any **action**. Payload will be added by middleware itself from the previous action of the action history que. So you need to pass the *actionType* and **maxNumberOfDispatch** as parameters. But the second parameter is optional.
 ```js
 
 import { redispatch } from 'redux-re-dispatch';
@@ -63,6 +68,6 @@ export function* getAllStationsSaga(payload) {
 | Method Name| Arguments  | Description |
 | --- | --- | --- |
 | **setupRedispatcher** | *options* {object} | This method will initialize the re-dispatch middleware using these options|
-| **redispatch** | *actionType* {string}, *maxNumberOfDispatch* {number}  | This method is the main dispatcher that filters actions by **actionType** and dispatches the **most recent** action from the action history. This method dispatches the given action type **maxNumberOfDispatch** times when caught exception as failover|
+| **redispatch** | **actionType** {string} {**required**}, **maxNumberOfDispatch** {number} {**optional**}  | This method is the main dispatcher that filters actions by **actionType** and dispatches the **most recent** action from the action history **without any payload**. This method dispatches the given action type **maxNumberOfDispatch** times within **intervalForResetingDispatch** milliseconds managing que of actions|
 
 ### Made with Love by Rahul Baruri
